@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F1017" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="170" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="q3Z-Qn-FAO">
+                                <rect key="frame" x="10" y="64" width="580" height="528"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="580" id="OTY-Zd-KuI"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="170" id="e3t-dE-maH" customClass="CustomTableViewCell">
+                                        <rect key="frame" x="0.0" y="28" width="580" height="170"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e3t-dE-maH" id="AF7-zd-65D">
+                                            <rect key="frame" x="0.0" y="0.0" width="580" height="169"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fling.png" translatesAutoresizingMaskIntoConstraints="NO" id="Qh2-Qv-6CI">
+                                                    <rect key="frame" x="14" y="17" width="176" height="125"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="125" id="FwA-oe-bcf"/>
+                                                        <constraint firstAttribute="width" constant="176" id="iS3-DE-1dM"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fling Title" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lkk-52-koJ">
+                                                    <rect key="frame" x="14" y="140" width="176" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="d04-BD-kmJ"/>
+                                                        <constraint firstAttribute="width" constant="176" id="xw9-re-JwO"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fling  description" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="9" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Zv2-0l-j4b">
+                                                    <rect key="frame" x="202" y="17" width="176" height="125"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="176" id="P5S-Bj-B74"/>
+                                                        <constraint firstAttribute="height" constant="125" id="plG-ML-1Y1"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Zv2-0l-j4b" firstAttribute="top" secondItem="Qh2-Qv-6CI" secondAttribute="top" id="0u1-mL-AkS"/>
+                                                <constraint firstItem="Qh2-Qv-6CI" firstAttribute="top" secondItem="AF7-zd-65D" secondAttribute="topMargin" constant="9" id="35o-To-qAX"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Qh2-Qv-6CI" secondAttribute="bottom" constant="19" id="686-hh-ldJ"/>
+                                                <constraint firstItem="Zv2-0l-j4b" firstAttribute="leading" secondItem="Qh2-Qv-6CI" secondAttribute="trailing" constant="12" id="8MY-Rm-cLQ"/>
+                                                <constraint firstItem="lkk-52-koJ" firstAttribute="leading" secondItem="AF7-zd-65D" secondAttribute="leadingMargin" constant="6" id="M1h-zi-6rg"/>
+                                                <constraint firstItem="lkk-52-koJ" firstAttribute="bottom" secondItem="AF7-zd-65D" secondAttribute="bottomMargin" id="gIl-rO-X3h"/>
+                                                <constraint firstItem="Qh2-Qv-6CI" firstAttribute="leading" secondItem="AF7-zd-65D" secondAttribute="leadingMargin" constant="6" id="ixh-BX-ilc"/>
+                                                <constraint firstItem="lkk-52-koJ" firstAttribute="top" secondItem="AF7-zd-65D" secondAttribute="topMargin" constant="132" id="k40-Ao-jUG"/>
+                                                <constraint firstItem="Zv2-0l-j4b" firstAttribute="centerX" secondItem="AF7-zd-65D" secondAttribute="centerX" id="qAR-wf-hyk"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="qAR-wf-hyk"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="flingDescription" destination="Zv2-0l-j4b" id="gID-4i-G18"/>
+                                            <outlet property="image" destination="Qh2-Qv-6CI" id="f65-2Z-nsJ"/>
+                                            <outlet property="title" destination="lkk-52-koJ" id="et1-nI-Rkg"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="q3Z-Qn-FAO" secondAttribute="trailing" constant="-10" id="FcF-ob-VZX"/>
+                            <constraint firstItem="q3Z-Qn-FAO" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="44" id="QpJ-r2-0IH"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="q3Z-Qn-FAO" secondAttribute="bottom" constant="8" id="lTM-w0-gJj"/>
+                            <constraint firstItem="q3Z-Qn-FAO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nN1-yT-RNG"/>
+                            <constraint firstItem="q3Z-Qn-FAO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-10" id="qhF-Jr-omr"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="q3Z-Qn-FAO" id="bWE-SB-IXK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="254" y="309"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="fling.png" width="369" height="194"/>
+    </resources>
+</document>
