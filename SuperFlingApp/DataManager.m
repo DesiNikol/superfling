@@ -59,7 +59,7 @@
              fo.title = [dict objectForKey:@"Title"];
              fo.userName = [dict objectForKey:@"UserName"];
              
-             //[self loadFlingImage:fo];
+             [self loadFlingImage:fo];
              
              [[DataManager sharedObject].superFlings addObject:fo];
              
@@ -81,31 +81,24 @@
 -(void)loadFlingImage:(FlingObject*)flingObject
 {
     NSString *url = [NSString stringWithFormat:@"%@%d", kImagesURL, flingObject.imageId];
-    NSLog(@"url %@", url);
+    //
     NSURL *baseURL = [NSURL URLWithString:url];
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL: baseURL];
     
     NSMutableURLRequest *request = [client  requestWithMethod:@"GET" path:nil parameters:nil];
     
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]initWithRequest:request];
-    
-    
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         
-         NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-         
-         NSError *e = nil;
-         NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData: responseObject options: NSJSONReadingAllowFragments error: &e];
-         
-         
-         
-     }failure:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
-         
-         
-     }];
-    [operation start];
+    AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    //requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
+    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //NSLog(@"Response: %@", responseObject);
+        flingObject.image = [UIImage imageWithData:responseObject];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"DataLoaded" object:nil];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Image error: %@", error);
+    }];
+    [requestOperation start];
 }
 
 /* Core Data */
