@@ -9,6 +9,7 @@
 #import "DataManager.h"
 #import "AFNetworking/AFNetworking.h"
 #import "FlingObject.h"
+#import "AppDelegate.h"
 
 #define kDataURL @"http://challenge.superfling.com/"
 #define kImagesURL @"http://challenge.superfling.com/photos/"
@@ -65,10 +66,11 @@
              
          }
          
-         [self cacheData];
+         
          
          [[NSNotificationCenter defaultCenter] postNotificationName:@"DataLoaded" object:nil];
          
+         [self cacheData];
          
       }failure:^(AFHTTPRequestOperation *operation, NSError *error)
     {
@@ -101,10 +103,39 @@
     [requestOperation start];
 }
 
-/* Core Data */
+/* Storing the images to Core Data */
 
 -(void)cacheData
 {
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    NSManagedObjectContext *managedObjectContext = [appDelegate managedObjectContext];
+    
+    for(FlingObject *fo in self.superFlings)
+    {
+        
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Fling" inManagedObjectContext:appDelegate.managedObjectContext];
+        NSManagedObject *newFling = [[NSManagedObject alloc]initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
+        
+        NSNumber *_id = [NSNumber numberWithInt:fo._id];
+        NSNumber *_imageId = [NSNumber numberWithInt:fo.imageId];
+        NSNumber *_userId = [NSNumber numberWithInt:fo.userId];
+        
+        [newFling setValue:fo.title forKey:@"title"];
+        [newFling setValue:_id forKey:@"flingId"];
+        [newFling setValue:_imageId forKey:@"imageId"];
+        [newFling setValue:_userId forKey:@"userId"];
+        [newFling setValue:fo.userName forKey:@"userName"];
+        
+        
+        NSError *error;
+        [managedObjectContext save:&error];
+        
+        if(error)
+        {
+            NSLog(@"core data failed");
+        }
+    }
     
 }
 

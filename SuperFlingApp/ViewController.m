@@ -53,9 +53,11 @@
     CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     FlingObject *fo = [[DataManager sharedObject].superFlings objectAtIndex:indexPath.row];
     cell.title.text = fo.title;
+    //cell.activityView.hidden = NO;
     if(fo.image)
     {
         cell.image.image = fo.image;
+        cell.activityView.hidden = YES;
         [cell.image setNeedsDisplay];
     }
     
@@ -64,7 +66,9 @@
 
 -(void)refreshView
 {
-    NSLog(@"done! %lu", (unsigned long)[DataManager sharedObject].superFlings.count);
+    //NSLog(@"done! %lu", (unsigned long)[DataManager sharedObject].superFlings.count);
+    //
+    self.activityView.hidden = YES;
     [self.tableView reloadData];
 }
 
