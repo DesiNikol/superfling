@@ -134,11 +134,22 @@
                                     <constraint firstItem="c2d-6Z-RAJ" firstAttribute="centerX" secondItem="FpT-dd-DqF" secondAttribute="centerX" id="kbO-aa-ihP"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Super flings:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yUh-HJ-S59">
+                                <rect key="frame" x="212" y="28" width="177" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Gs5-5H-qkF"/>
+                                    <constraint firstAttribute="width" constant="177" id="oHK-ew-JER"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="9bf-f3-JjT" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="2Fq-KZ-uaZ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="q3Z-Qn-FAO" secondAttribute="trailing" constant="-10" id="FcF-ob-VZX"/>
+                            <constraint firstItem="yUh-HJ-S59" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Lbq-Sf-hLC"/>
                             <constraint firstItem="q3Z-Qn-FAO" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="44" id="QpJ-r2-0IH"/>
                             <constraint firstItem="9bf-f3-JjT" firstAttribute="centerX" secondItem="q3Z-Qn-FAO" secondAttribute="centerX" id="UJR-jo-Eby"/>
                             <constraint firstItem="9bf-f3-JjT" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="cpu-eN-U9y"/>
@@ -146,6 +157,7 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="q3Z-Qn-FAO" secondAttribute="bottom" constant="8" id="lTM-w0-gJj"/>
                             <constraint firstItem="q3Z-Qn-FAO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nN1-yT-RNG"/>
                             <constraint firstItem="q3Z-Qn-FAO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-10" id="qhF-Jr-omr"/>
+                            <constraint firstItem="yUh-HJ-S59" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="vNu-2D-YWd"/>
                         </constraints>
                     </view>
                     <connections>
