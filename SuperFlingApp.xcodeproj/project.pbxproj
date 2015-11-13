@@ -92,6 +92,7 @@
 		CF6CB1461BE7F3C500D7F4E9 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		CF6CB1501BE7F55C00D7F4E9 /* Fling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fling.h; sourceTree = "<group>"; };
 		CF6CB1511BE7F55C00D7F4E9 /* Fling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fling.m; sourceTree = "<group>"; };
+		CF76F8391BF5FD1B00CF8268 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +192,7 @@
 				CF6CB11D1BE7EDE000D7F4E9 /* objects */,
 				CF6CB0FA1BE7E23500D7F4E9 /* DataManager.h */,
 				CF6CB0FB1BE7E23500D7F4E9 /* DataManager.m */,
+				CF76F8391BF5FD1B00CF8268 /* Constants.h */,
 			);
 			name = Model;
 			sourceTree = "<group>";

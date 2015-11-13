@@ -7,15 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/NSFetchRequest.h>
+#import <CoreData/CoreData.h>
 
-@interface DataManager : NSObject
+@interface DataManager : NSObject<NSFetchedResultsControllerDelegate>
 {
     BOOL __block queueIsEmpty;
 }
 
-@property(nonatomic, retain) NSOperationQueue *queue;
+@property(nonatomic, retain) NSMutableArray *superFlings;
 
 +(DataManager *)sharedObject;
+//
 -(void)loadContent;
+-(void)loadFlingImageWithID:(int)imageId forFlingWithID:(int)flingID;
 
 @end

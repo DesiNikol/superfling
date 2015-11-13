@@ -18,6 +18,5 @@
 @property(nonatomic, strong) NSString *userId;
 @property(nonatomic, strong) NSString *userName;
 //
-@property(nonatomic, retain) NSData *image;
-
+@property(nonatomic, strong) NSData *image;
 @end

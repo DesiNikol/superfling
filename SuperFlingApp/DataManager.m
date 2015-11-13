@@ -10,9 +10,8 @@
 #import "AFNetworking/AFNetworking.h"
 #import "Fling.h"
 #import "AppDelegate.h"
+#import "Constants.h"
 
-#define kDataURL @"http://challenge.superfling.com/"
-#define kImagesURL @"http://challenge.superfling.com/photos/"
 
 @implementation DataManager
 
@@ -33,28 +32,21 @@
     return sharedObject;
 }
 
-
--(id)init
-{
-    self = [super init];
-    
-    //Initializing the nsoperation queue:
-    
-    self.queue = [[NSOperationQueue alloc] init];
-    
-    return self;
-}
-
 /* 
  
  * Loading all contect from the server via AFNetworking.
  
  * Parsing the content and storing via NSManagedObject;
  
+ * ( First verifying that a fling is not saved in Core Data already. )
+ 
  */
 
 -(void)loadContent
 {
+    self.superFlings = [[NSMutableArray alloc] init];
+    
+    [self loadSavedFlings];//Load all saved Flings
     
     NSURL *baseURL = [NSURL URLWithString:kDataURL];
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL: baseURL];
@@ -67,7 +59,7 @@
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject)
      {
          
-         NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+         //NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
          
          NSError *e = nil;
          NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData: responseObject options: NSJSONReadingAllowFragments error: &e];
@@ -87,11 +79,27 @@
          
          for(NSDictionary *dict in jsonArray)
          {
-             NSLog(@"result %@", dict.description);
+             //NSLog(@"result %@", dict.description);
+             
+             //Check if the fling was already saved
+             int ID = [[dict objectForKey:@"ID"] intValue];
+             BOOL isSaved = NO;
+             for(Fling *fling in self.superFlings)
+             {
+                 if(fling.flingId.intValue == ID)
+                 {
+                     isSaved = YES;
+                 }
+             }
+             
+             if(isSaved)
+             {
+                 continue;
+             }
              
              dispatch_async(saveQueue, ^{
                  
-                 int ID = [[dict objectForKey:@"ID"] intValue];
+                 
                  int imageId = [[dict objectForKey:@"ImageID"] intValue];
                  int userId = [[dict objectForKey:@"UserID"] intValue];
                  NSString *title = [dict objectForKey:@"Title"];
@@ -106,7 +114,7 @@
                  [newFling setValue:[NSNumber numberWithInt:userId] forKey:@"userId"];
                  [newFling setValue:userName forKey:@"userName"];
                  
-                 
+                
               });
          }
          
@@ -118,9 +126,39 @@
     [operation start];
 }
 
+-(void)loadSavedFlings
+{
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    NSManagedObjectContext *managedObjectContext = [appDelegate managedObjectContext];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"Fling"];
+    NSSortDescriptor* sortDescriptor = [[NSSortDescriptor alloc]
+                                        initWithKey:@"flingId" ascending:YES];
+    NSArray* sortDescriptors = [[NSArray alloc] initWithObjects: sortDescriptor, nil];
+    [request setSortDescriptors:sortDescriptors];
+    NSError *error = nil;
+    
+    NSArray *results = [managedObjectContext executeFetchRequest:request error:&error];
+    
+    
+    if (error != nil) {
+        
+        //Deal with failure
+        
+    }
+    else {
+        
+        //Deal with success
+        self.superFlings = [[NSMutableArray alloc] initWithArray:results];
+        //
+        
+    }
+
+}
+
 -(void)checkQueue
 {
-    [self performSelector:@selector(checkQueue) withObject:nil afterDelay:.1];
     
     if(queueIsEmpty)
     {
@@ -139,13 +177,16 @@
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"DataLoaded" object:nil];
         
+    }else{
+        [self performSelector:@selector(checkQueue) withObject:nil afterDelay:.5];
+        
     }
 }
 
 
--(void)loadFlingImage:(Fling*)flingObject
+-(void)loadFlingImageWithID:(int)imageId forFlingWithID:(int)flingID
 {
-    NSString *url = [NSString stringWithFormat:@"%@%d", kImagesURL, flingObject.imageId.intValue];
+    NSString *url = [NSString stringWithFormat:@"%@%d", kImagesURL, imageId];
     //
     NSURL *baseURL = [NSURL URLWithString:url];
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL: baseURL];
@@ -153,18 +194,47 @@
     NSMutableURLRequest *request = [client  requestWithMethod:@"GET" path:nil parameters:nil];
     
     AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    //requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
-    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
+    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
         //NSLog(@"Response: %@", responseObject);
-        flingObject.image = responseObject;
+        NSData *data = responseObject;
+        Fling *superFling = nil;
+        for(Fling *fling in self.superFlings)
+        {
+            if(fling.flingId.intValue == flingID)
+            {
+                superFling = fling;
+                break;
+            }
+        }
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"DataLoaded" object:nil];
+        if(superFling)
+        {
+            superFling.image = data;
+            AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+            
+            NSManagedObjectContext *managedObjectContext = [appDelegate managedObjectContext];
+            NSError *error;
+            [managedObjectContext save:&error];
+            
+            if(error)
+            {
+                NSLog(@"core data failed");
+            }
+            
+           [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshImages" object:nil];
+            
+        }else{
+            NSLog(@"error loading images!! ");
+        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Image error: %@", error);
     }];
     [requestOperation start];
 }
+
 
 
 @end

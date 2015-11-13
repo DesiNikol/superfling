@@ -42,6 +42,8 @@
     
     //Once the data is fully retrieved by the DataManger class, the table is refreshed:
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshView) name:@"DataLoaded" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshImages) name:@"RefreshImages" object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -63,7 +65,10 @@
     NSManagedObjectContext *managedObjectContext = [appDelegate managedObjectContext];
     
     NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"Fling"];
-    
+    NSSortDescriptor* sortDescriptor = [[NSSortDescriptor alloc]
+                                        initWithKey:@"flingId" ascending:NO];
+    NSArray* sortDescriptors = [[NSArray alloc] initWithObjects: sortDescriptor, nil];
+    [request setSortDescriptors:sortDescriptors];
     NSError *error = nil;
     
     NSArray *results = [managedObjectContext executeFetchRequest:request error:&error];
@@ -77,7 +82,7 @@
     else {
         
         //Deal with success
-        superFlings = [[NSMutableArray alloc] initWithArray:results];
+        [DataManager sharedObject].superFlings = [[NSMutableArray alloc] initWithArray:results];
         //
         self.activityView.hidden = YES;
         //
@@ -85,6 +90,11 @@
         
     }
     
+}
+
+-(void)refreshImages
+{
+    [self.tableView reloadData];
 }
 
 #pragma mark UITableViewDelegate 
@@ -96,22 +106,30 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return superFlings.count;
+    return [DataManager sharedObject].superFlings.count;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    Fling *fling = [superFlings objectAtIndex:indexPath.row];
-    cell.title.text = fling.title;
-    //cell.activityView.hidden = NO;
+    Fling *fling = [[DataManager sharedObject].superFlings objectAtIndex:indexPath.row];
+    cell.title.text = [NSString stringWithFormat:@"%@ - %d", fling.title, fling.imageId.intValue];
+    //
     if(fling.image)
     {
         cell.image.image = [UIImage imageWithData:fling.image];
         cell.activityView.hidden = YES;
         [cell.image setNeedsDisplay];
+    }else{
+        
+        /* Load the image data */
+        
+        dispatch_queue_t imageQueue = dispatch_queue_create("ImageQueue",NULL);
+        dispatch_async(imageQueue, ^{
+                
+                [[DataManager sharedObject] loadFlingImageWithID:fling.imageId.intValue forFlingWithID:fling.flingId.intValue];
+            });
     }
-    
     return cell;
 }
 
