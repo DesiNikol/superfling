@@ -34,7 +34,14 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+/*
+ 
+ * Initial view set-up:
+ 
+ */
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
@@ -43,7 +50,7 @@
     
     [self.tableView reloadData];
     
-    //Once the data is fully retrieved by the DataManger class, the table is refreshed:
+    //Register for global notifications:
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshView) name:@"DataLoaded" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshImages) name:@"RefreshImages" object:nil];
@@ -95,10 +102,22 @@
     
 }
 
+/*
+ 
+ * Reloading all table view cells:
+ 
+ */
+
 -(void)refreshImages
 {
     [self.tableView reloadData];
 }
+
+/*
+ 
+ * Table view configuration and display:
+ 
+ */
 
 #pragma mark UITableViewDelegate 
 
@@ -112,12 +131,19 @@
     return [DataManager sharedObject].superFlings.count;
 }
 
+/*
+ 
+ * Rendering custom cells:
+ 
+ */
+
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     Fling *fling = [[DataManager sharedObject].superFlings objectAtIndex:indexPath.row];
     cell.title.text = fling.title;//[NSString stringWithFormat:@"%@ - %d", fling.title, fling.imageId.intValue];
     //
+    /* If there is an image - loaded & stored - do not load a 2nd time */
     if(fling.image)
     {
         cell.image.image = [UIImage imageWithData:fling.image];
@@ -125,7 +151,7 @@
         [cell.image setNeedsDisplay];
     }else{
         
-        /* Load the image data */
+        /* Load the image data if there is no image for this fling */
         
         dispatch_queue_t imageQueue = dispatch_queue_create("ImageQueue",NULL);
         dispatch_async(imageQueue, ^{

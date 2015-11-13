@@ -53,9 +53,6 @@
 
     [client GET:@"" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
-         //NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-         
-         NSError *e = nil;
         NSArray *jsonArray = responseObject;
         
          AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
@@ -119,6 +116,14 @@
     
 }
 
+/*
+ 
+ * Load ALL stored flings at the start in order to avoid
+ 
+ * duplicate entries when loading server data.
+ 
+ */
+
 -(void)loadSavedFlings
 {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
@@ -150,6 +155,14 @@
 
 }
 
+/* 
+ 
+ * Check if the initial queue for data retrieval is empty
+ 
+ * and load the flings in the main table if so
+
+ */
+
 -(void)checkQueue
 {
     
@@ -175,6 +188,12 @@
         
     }
 }
+
+/*
+ 
+ * Load & store image data for each fling.
+ 
+ */
 
 
 -(void)loadFlingImageWithID:(int)imageId forFlingWithID:(int)flingID
