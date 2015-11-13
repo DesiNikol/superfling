@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39DE6BCDA1F112F415DD9952 /* libPods-SuperFlingApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B36E04F529B1C85CC4534597 /* libPods-SuperFlingApp.a */; };
 		CF6CB0C01BE7E09800D7F4E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CB0BF1BE7E09800D7F4E9 /* main.m */; };
 		CF6CB0C31BE7E09800D7F4E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CB0C21BE7E09800D7F4E9 /* AppDelegate.m */; };
 		CF6CB0C61BE7E09900D7F4E9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CB0C51BE7E09900D7F4E9 /* ViewController.m */; };
@@ -19,15 +20,6 @@
 		CF6CB0F91BE7E21D00D7F4E9 /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CB0F81BE7E21D00D7F4E9 /* CustomTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		CF6CB0FC1BE7E23500D7F4E9 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CB0FB1BE7E23500D7F4E9 /* DataManager.m */; settings = {ASSET_TAGS = (); }; };
 		CF6CB11C1BE7EC8A00D7F4E9 /* fling.png in Resources */ = {isa = PBXBuildFile; fileRef = CF6CB11B1BE7EC8A00D7F4E9 /* fling.png */; settings = {ASSET_TAGS = (); }; };
-		CF6CB1471BE7F3C500D7F4E9 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CB1351BE7F3C500D7F4E9 /* AFHTTPClient.m */; settings = {ASSET_TAGS = (); }; };
-		CF6CB1481BE7F3C500D7F4E9 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CB1371BE7F3C500D7F4E9 /* AFHTTPRequestOperation.m */; settings = {ASSET_TAGS = (); }; };
-		CF6CB1491BE7F3C500D7F4E9 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CB1391BE7F3C500D7F4E9 /* AFImageRequestOperation.m */; settings = {ASSET_TAGS = (); }; };
-		CF6CB14A1BE7F3C500D7F4E9 /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CB13B1BE7F3C500D7F4E9 /* AFJSONRequestOperation.m */; settings = {ASSET_TAGS = (); }; };
-		CF6CB14B1BE7F3C500D7F4E9 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CB13D1BE7F3C500D7F4E9 /* AFNetworkActivityIndicatorManager.m */; settings = {ASSET_TAGS = (); }; };
-		CF6CB14C1BE7F3C500D7F4E9 /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CB1401BE7F3C500D7F4E9 /* AFPropertyListRequestOperation.m */; settings = {ASSET_TAGS = (); }; };
-		CF6CB14D1BE7F3C500D7F4E9 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CB1421BE7F3C500D7F4E9 /* AFURLConnectionOperation.m */; settings = {ASSET_TAGS = (); }; };
-		CF6CB14E1BE7F3C500D7F4E9 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CB1441BE7F3C500D7F4E9 /* AFXMLRequestOperation.m */; settings = {ASSET_TAGS = (); }; };
-		CF6CB14F1BE7F3C500D7F4E9 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CB1461BE7F3C500D7F4E9 /* UIImageView+AFNetworking.m */; settings = {ASSET_TAGS = (); }; };
 		CF6CB1521BE7F55C00D7F4E9 /* Fling.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CB1511BE7F55C00D7F4E9 /* Fling.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -49,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2D7974AC353078BA6868D4E4 /* Pods-SuperFlingApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SuperFlingApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SuperFlingApp/Pods-SuperFlingApp.release.xcconfig"; sourceTree = "<group>"; };
+		B36E04F529B1C85CC4534597 /* libPods-SuperFlingApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SuperFlingApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF6CB0BB1BE7E09800D7F4E9 /* SuperFlingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperFlingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF6CB0BF1BE7E09800D7F4E9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CF6CB0C11BE7E09800D7F4E9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -71,28 +65,10 @@
 		CF6CB0FA1BE7E23500D7F4E9 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		CF6CB0FB1BE7E23500D7F4E9 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		CF6CB11B1BE7EC8A00D7F4E9 /* fling.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fling.png; path = images/fling.png; sourceTree = "<group>"; };
-		CF6CB1341BE7F3C500D7F4E9 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
-		CF6CB1351BE7F3C500D7F4E9 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
-		CF6CB1361BE7F3C500D7F4E9 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
-		CF6CB1371BE7F3C500D7F4E9 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
-		CF6CB1381BE7F3C500D7F4E9 /* AFImageRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFImageRequestOperation.h; sourceTree = "<group>"; };
-		CF6CB1391BE7F3C500D7F4E9 /* AFImageRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFImageRequestOperation.m; sourceTree = "<group>"; };
-		CF6CB13A1BE7F3C500D7F4E9 /* AFJSONRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFJSONRequestOperation.h; sourceTree = "<group>"; };
-		CF6CB13B1BE7F3C500D7F4E9 /* AFJSONRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFJSONRequestOperation.m; sourceTree = "<group>"; };
-		CF6CB13C1BE7F3C500D7F4E9 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
-		CF6CB13D1BE7F3C500D7F4E9 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
-		CF6CB13E1BE7F3C500D7F4E9 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
-		CF6CB13F1BE7F3C500D7F4E9 /* AFPropertyListRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPropertyListRequestOperation.h; sourceTree = "<group>"; };
-		CF6CB1401BE7F3C500D7F4E9 /* AFPropertyListRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFPropertyListRequestOperation.m; sourceTree = "<group>"; };
-		CF6CB1411BE7F3C500D7F4E9 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
-		CF6CB1421BE7F3C500D7F4E9 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
-		CF6CB1431BE7F3C500D7F4E9 /* AFXMLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFXMLRequestOperation.h; sourceTree = "<group>"; };
-		CF6CB1441BE7F3C500D7F4E9 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
-		CF6CB1451BE7F3C500D7F4E9 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
-		CF6CB1461BE7F3C500D7F4E9 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		CF6CB1501BE7F55C00D7F4E9 /* Fling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fling.h; sourceTree = "<group>"; };
 		CF6CB1511BE7F55C00D7F4E9 /* Fling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fling.m; sourceTree = "<group>"; };
 		CF76F8391BF5FD1B00CF8268 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		EA20C2EEF052714CC5707EFE /* Pods-SuperFlingApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SuperFlingApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SuperFlingApp/Pods-SuperFlingApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39DE6BCDA1F112F415DD9952 /* libPods-SuperFlingApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,6 +104,8 @@
 				CF6CB0DA1BE7E09900D7F4E9 /* SuperFlingAppTests */,
 				CF6CB0E51BE7E09900D7F4E9 /* SuperFlingAppUITests */,
 				CF6CB0BC1BE7E09800D7F4E9 /* Products */,
+				EB42F5D6F652D31C29DA88DF /* Pods */,
+				E322C11ACEBC23F929D58CCC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -188,7 +167,6 @@
 		CF6CB0F41BE7E13200D7F4E9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CF6CB1331BE7F3C500D7F4E9 /* AFNetworking */,
 				CF6CB11D1BE7EDE000D7F4E9 /* objects */,
 				CF6CB0FA1BE7E23500D7F4E9 /* DataManager.h */,
 				CF6CB0FB1BE7E23500D7F4E9 /* DataManager.m */,
@@ -232,30 +210,21 @@
 			name = objects;
 			sourceTree = "<group>";
 		};
-		CF6CB1331BE7F3C500D7F4E9 /* AFNetworking */ = {
+		E322C11ACEBC23F929D58CCC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CF6CB1341BE7F3C500D7F4E9 /* AFHTTPClient.h */,
-				CF6CB1351BE7F3C500D7F4E9 /* AFHTTPClient.m */,
-				CF6CB1361BE7F3C500D7F4E9 /* AFHTTPRequestOperation.h */,
-				CF6CB1371BE7F3C500D7F4E9 /* AFHTTPRequestOperation.m */,
-				CF6CB1381BE7F3C500D7F4E9 /* AFImageRequestOperation.h */,
-				CF6CB1391BE7F3C500D7F4E9 /* AFImageRequestOperation.m */,
-				CF6CB13A1BE7F3C500D7F4E9 /* AFJSONRequestOperation.h */,
-				CF6CB13B1BE7F3C500D7F4E9 /* AFJSONRequestOperation.m */,
-				CF6CB13C1BE7F3C500D7F4E9 /* AFNetworkActivityIndicatorManager.h */,
-				CF6CB13D1BE7F3C500D7F4E9 /* AFNetworkActivityIndicatorManager.m */,
-				CF6CB13E1BE7F3C500D7F4E9 /* AFNetworking.h */,
-				CF6CB13F1BE7F3C500D7F4E9 /* AFPropertyListRequestOperation.h */,
-				CF6CB1401BE7F3C500D7F4E9 /* AFPropertyListRequestOperation.m */,
-				CF6CB1411BE7F3C500D7F4E9 /* AFURLConnectionOperation.h */,
-				CF6CB1421BE7F3C500D7F4E9 /* AFURLConnectionOperation.m */,
-				CF6CB1431BE7F3C500D7F4E9 /* AFXMLRequestOperation.h */,
-				CF6CB1441BE7F3C500D7F4E9 /* AFXMLRequestOperation.m */,
-				CF6CB1451BE7F3C500D7F4E9 /* UIImageView+AFNetworking.h */,
-				CF6CB1461BE7F3C500D7F4E9 /* UIImageView+AFNetworking.m */,
+				B36E04F529B1C85CC4534597 /* libPods-SuperFlingApp.a */,
 			);
-			path = AFNetworking;
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EB42F5D6F652D31C29DA88DF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EA20C2EEF052714CC5707EFE /* Pods-SuperFlingApp.debug.xcconfig */,
+				2D7974AC353078BA6868D4E4 /* Pods-SuperFlingApp.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,9 +234,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CF6CB0EB1BE7E09900D7F4E9 /* Build configuration list for PBXNativeTarget "SuperFlingApp" */;
 			buildPhases = (
+				63983A07EE6151A0DF5F3A13 /* Check Pods Manifest.lock */,
 				CF6CB0B71BE7E09800D7F4E9 /* Sources */,
 				CF6CB0B81BE7E09800D7F4E9 /* Frameworks */,
 				CF6CB0B91BE7E09800D7F4E9 /* Resources */,
+				51626B15D4444F672537347C /* Embed Pods Frameworks */,
+				4982C89FB952D4EADB556C3A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -384,25 +356,64 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4982C89FB952D4EADB556C3A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SuperFlingApp/Pods-SuperFlingApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		51626B15D4444F672537347C /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SuperFlingApp/Pods-SuperFlingApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		63983A07EE6151A0DF5F3A13 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CF6CB0B71BE7E09800D7F4E9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF6CB14D1BE7F3C500D7F4E9 /* AFURLConnectionOperation.m in Sources */,
-				CF6CB14F1BE7F3C500D7F4E9 /* UIImageView+AFNetworking.m in Sources */,
 				CF6CB0C61BE7E09900D7F4E9 /* ViewController.m in Sources */,
 				CF6CB0FC1BE7E23500D7F4E9 /* DataManager.m in Sources */,
-				CF6CB14C1BE7F3C500D7F4E9 /* AFPropertyListRequestOperation.m in Sources */,
 				CF6CB0C31BE7E09800D7F4E9 /* AppDelegate.m in Sources */,
 				CF6CB0CC1BE7E09900D7F4E9 /* SuperFlingApp.xcdatamodeld in Sources */,
-				CF6CB14E1BE7F3C500D7F4E9 /* AFXMLRequestOperation.m in Sources */,
-				CF6CB14B1BE7F3C500D7F4E9 /* AFNetworkActivityIndicatorManager.m in Sources */,
-				CF6CB1481BE7F3C500D7F4E9 /* AFHTTPRequestOperation.m in Sources */,
 				CF6CB0F91BE7E21D00D7F4E9 /* CustomTableViewCell.m in Sources */,
-				CF6CB1491BE7F3C500D7F4E9 /* AFImageRequestOperation.m in Sources */,
-				CF6CB1471BE7F3C500D7F4E9 /* AFHTTPClient.m in Sources */,
-				CF6CB14A1BE7F3C500D7F4E9 /* AFJSONRequestOperation.m in Sources */,
 				CF6CB0C01BE7E09800D7F4E9 /* main.m in Sources */,
 				CF6CB1521BE7F55C00D7F4E9 /* Fling.m in Sources */,
 			);
@@ -541,6 +552,7 @@
 		};
 		CF6CB0EC1BE7E09900D7F4E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EA20C2EEF052714CC5707EFE /* Pods-SuperFlingApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SuperFlingApp/Info.plist;
@@ -552,6 +564,7 @@
 		};
 		CF6CB0ED1BE7E09900D7F4E9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D7974AC353078BA6868D4E4 /* Pods-SuperFlingApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SuperFlingApp/Info.plist;

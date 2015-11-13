@@ -7,7 +7,7 @@
 //
 
 #import "DataManager.h"
-#import "AFNetworking/AFNetworking.h"
+#import <AFNetworking/AFNetworking.h>
 #import "Fling.h"
 #import "AppDelegate.h"
 #import "Constants.h"
@@ -49,21 +49,15 @@
     [self loadSavedFlings];//Load all saved Flings
     
     NSURL *baseURL = [NSURL URLWithString:kDataURL];
-    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL: baseURL];
+    AFHTTPSessionManager *client = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
 
-    NSMutableURLRequest *request = [client  requestWithMethod:@"GET" path:nil parameters:nil];
-    
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc]initWithRequest:request];
-    
-    
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         
+    [client GET:@"" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
          //NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
          
          NSError *e = nil;
-         NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData: responseObject options: NSJSONReadingAllowFragments error: &e];
-         
+        NSArray *jsonArray = responseObject;
+        
          AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
          
          NSManagedObjectContext *managedObjectContext = [appDelegate managedObjectContext];
@@ -79,9 +73,10 @@
          
          for(NSDictionary *dict in jsonArray)
          {
-             //NSLog(@"result %@", dict.description);
+             NSLog(@"result %@", dict.description);
              
-             //Check if the fling was already saved
+             //Check if the fling was already saved - Do not save twice!
+             
              int ID = [[dict objectForKey:@"ID"] intValue];
              BOOL isSaved = NO;
              for(Fling *fling in self.superFlings)
@@ -118,12 +113,10 @@
               });
          }
          
-      }failure:^(AFHTTPRequestOperation *operation, NSError *error)
-    {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
-         
-     }];
-    [operation start];
+    }];
+    
 }
 
 -(void)loadSavedFlings
@@ -134,7 +127,7 @@
     
     NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"Fling"];
     NSSortDescriptor* sortDescriptor = [[NSSortDescriptor alloc]
-                                        initWithKey:@"flingId" ascending:YES];
+                                        initWithKey:@"flingId" ascending:NO];
     NSArray* sortDescriptors = [[NSArray alloc] initWithObjects: sortDescriptor, nil];
     [request setSortDescriptors:sortDescriptors];
     NSError *error = nil;
@@ -186,18 +179,16 @@
 
 -(void)loadFlingImageWithID:(int)imageId forFlingWithID:(int)flingID
 {
-    NSString *url = [NSString stringWithFormat:@"%@%d", kImagesURL, imageId];
+    NSString *path = [NSString stringWithFormat:@"%@%@%d.png", kDataURL, kImagesURLPath, imageId];
     //
-    NSURL *baseURL = [NSURL URLWithString:url];
-    AFHTTPClient *client = [AFHTTPClient clientWithBaseURL: baseURL];
+    NSURL *baseURL = [NSURL URLWithString:path];
     
-    NSMutableURLRequest *request = [client  requestWithMethod:@"GET" path:nil parameters:nil];
+    AFHTTPSessionManager *client = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
+    client.requestSerializer = [AFHTTPRequestSerializer serializer];
+    client.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-    AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    
-    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
-        //NSLog(@"Response: %@", responseObject);
+    [client GET:@"" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        // NSLog(@"Response: %@", responseObject);
         NSData *data = responseObject;
         Fling *superFling = nil;
         for(Fling *fling in self.superFlings)
@@ -220,19 +211,18 @@
             
             if(error)
             {
-                NSLog(@"core data failed");
+                //NSLog(@"core data failed");
             }
             
            [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshImages" object:nil];
             
         }else{
-            NSLog(@"error loading images!! ");
+            //NSLog(@"error loading images!! ");
         }
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Image error: %@", error);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        //NSLog(@"failed to load images");
     }];
-    [requestOperation start];
 }
 
 

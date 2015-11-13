@@ -23,7 +23,10 @@
 #import "Fling.h"
 #import <CoreData/NSFetchRequest.h>
 #import <CoreData/CoreData.h>
+#import <AFNetworking/AFNetworking.h>
 #import "AppDelegate.h"
+#import "UIImageView+AFNetworking.h"
+#import "Constants.h"
 
 @interface ViewController ()
 
@@ -113,7 +116,7 @@
 {
     CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     Fling *fling = [[DataManager sharedObject].superFlings objectAtIndex:indexPath.row];
-    cell.title.text = [NSString stringWithFormat:@"%@ - %d", fling.title, fling.imageId.intValue];
+    cell.title.text = fling.title;//[NSString stringWithFormat:@"%@ - %d", fling.title, fling.imageId.intValue];
     //
     if(fling.image)
     {
@@ -129,6 +132,7 @@
                 
                 [[DataManager sharedObject] loadFlingImageWithID:fling.imageId.intValue forFlingWithID:fling.flingId.intValue];
             });
+         
     }
     return cell;
 }

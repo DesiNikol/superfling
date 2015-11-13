@@ -10,7 +10,7 @@
 #define Constants_h
 
 #define kDataURL @"http://challenge.superfling.com/"
-#define kImagesURL @"http://challenge.superfling.com/photos/"
+#define kImagesURLPath @"/photos/"
 
 
 #endif /* Constants_h */
