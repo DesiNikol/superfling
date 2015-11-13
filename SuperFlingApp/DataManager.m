@@ -8,13 +8,19 @@
 
 #import "DataManager.h"
 #import "AFNetworking/AFNetworking.h"
-#import "FlingObject.h"
+#import "Fling.h"
 #import "AppDelegate.h"
 
 #define kDataURL @"http://challenge.superfling.com/"
 #define kImagesURL @"http://challenge.superfling.com/photos/"
 
 @implementation DataManager
+
+/*
+ 
+ * Using singleton  for easy access to all methods.
+ 
+ */
 
 +(DataManager *)sharedObject
 {
@@ -27,12 +33,28 @@
     return sharedObject;
 }
 
-/* Loading all contect from the server via AFNetworking */
+
+-(id)init
+{
+    self = [super init];
+    
+    //Initializing the nsoperation queue:
+    
+    self.queue = [[NSOperationQueue alloc] init];
+    
+    return self;
+}
+
+/* 
+ 
+ * Loading all contect from the server via AFNetworking.
+ 
+ * Parsing the content and storing via NSManagedObject;
+ 
+ */
 
 -(void)loadContent
 {
-    self.superFlings = [[NSMutableArray alloc] init];
-
     
     NSURL *baseURL = [NSURL URLWithString:kDataURL];
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL: baseURL];
@@ -50,27 +72,43 @@
          NSError *e = nil;
          NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData: responseObject options: NSJSONReadingAllowFragments error: &e];
          
+         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+         
+         NSManagedObjectContext *managedObjectContext = [appDelegate managedObjectContext];
+         
+         dispatch_queue_t saveQueue = dispatch_queue_create("Save Queue",NULL);
+         
+         queueIsEmpty = false;
+         dispatch_barrier_async (saveQueue, ^{
+             queueIsEmpty = true;
+         });
+         
+         [self performSelector:@selector(checkQueue) withObject:nil afterDelay:.1];
+         
          for(NSDictionary *dict in jsonArray)
          {
              NSLog(@"result %@", dict.description);
-             FlingObject *fo = [[FlingObject alloc] init];
-             fo._id = [[dict objectForKey:@"ID"] intValue];
-             fo.imageId = [[dict objectForKey:@"ImageID"] intValue];
-             fo.userId = [[dict objectForKey:@"UserID"] intValue];
-             fo.title = [dict objectForKey:@"Title"];
-             fo.userName = [dict objectForKey:@"UserName"];
              
-             [self loadFlingImage:fo];
-             
-             [[DataManager sharedObject].superFlings addObject:fo];
-             
+             dispatch_async(saveQueue, ^{
+                 
+                 int ID = [[dict objectForKey:@"ID"] intValue];
+                 int imageId = [[dict objectForKey:@"ImageID"] intValue];
+                 int userId = [[dict objectForKey:@"UserID"] intValue];
+                 NSString *title = [dict objectForKey:@"Title"];
+                 NSString *userName = [dict objectForKey:@"UserName"];
+                 
+                 NSEntityDescription *entity = [NSEntityDescription entityForName:@"Fling" inManagedObjectContext:appDelegate.managedObjectContext];
+                 NSManagedObject *newFling = [[NSManagedObject alloc]initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
+                 
+                 [newFling setValue:title forKey:@"title"];
+                 [newFling setValue:[NSNumber numberWithInt:ID] forKey:@"flingId"];
+                 [newFling setValue:[NSNumber numberWithInt:imageId] forKey:@"imageId"];
+                 [newFling setValue:[NSNumber numberWithInt:userId] forKey:@"userId"];
+                 [newFling setValue:userName forKey:@"userName"];
+                 
+                 
+              });
          }
-         
-         
-         
-         [[NSNotificationCenter defaultCenter] postNotificationName:@"DataLoaded" object:nil];
-         
-         [self cacheData];
          
       }failure:^(AFHTTPRequestOperation *operation, NSError *error)
     {
@@ -80,9 +118,34 @@
     [operation start];
 }
 
--(void)loadFlingImage:(FlingObject*)flingObject
+-(void)checkQueue
 {
-    NSString *url = [NSString stringWithFormat:@"%@%d", kImagesURL, flingObject.imageId];
+    [self performSelector:@selector(checkQueue) withObject:nil afterDelay:.1];
+    
+    if(queueIsEmpty)
+    {
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        
+        NSManagedObjectContext *managedObjectContext = [appDelegate managedObjectContext];
+        NSError *error;
+        [managedObjectContext save:&error];
+        
+        if(error)
+        {
+            NSLog(@"core data failed");
+        }
+        
+        /* Reload the table view with all new flings */
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"DataLoaded" object:nil];
+        
+    }
+}
+
+
+-(void)loadFlingImage:(Fling*)flingObject
+{
+    NSString *url = [NSString stringWithFormat:@"%@%d", kImagesURL, flingObject.imageId.intValue];
     //
     NSURL *baseURL = [NSURL URLWithString:url];
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL: baseURL];
@@ -93,7 +156,7 @@
     //requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         //NSLog(@"Response: %@", responseObject);
-        flingObject.image = [UIImage imageWithData:responseObject];
+        flingObject.image = responseObject;
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"DataLoaded" object:nil];
         
@@ -103,40 +166,5 @@
     [requestOperation start];
 }
 
-/* Storing the images to Core Data */
-
--(void)cacheData
-{
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    
-    NSManagedObjectContext *managedObjectContext = [appDelegate managedObjectContext];
-    
-    for(FlingObject *fo in self.superFlings)
-    {
-        
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Fling" inManagedObjectContext:appDelegate.managedObjectContext];
-        NSManagedObject *newFling = [[NSManagedObject alloc]initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
-        
-        NSNumber *_id = [NSNumber numberWithInt:fo._id];
-        NSNumber *_imageId = [NSNumber numberWithInt:fo.imageId];
-        NSNumber *_userId = [NSNumber numberWithInt:fo.userId];
-        
-        [newFling setValue:fo.title forKey:@"title"];
-        [newFling setValue:_id forKey:@"flingId"];
-        [newFling setValue:_imageId forKey:@"imageId"];
-        [newFling setValue:_userId forKey:@"userId"];
-        [newFling setValue:fo.userName forKey:@"userName"];
-        
-        
-        NSError *error;
-        [managedObjectContext save:&error];
-        
-        if(error)
-        {
-            NSLog(@"core data failed");
-        }
-    }
-    
-}
 
 @end

@@ -28,7 +28,7 @@
 		CF6CB14D1BE7F3C500D7F4E9 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CB1421BE7F3C500D7F4E9 /* AFURLConnectionOperation.m */; settings = {ASSET_TAGS = (); }; };
 		CF6CB14E1BE7F3C500D7F4E9 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CB1441BE7F3C500D7F4E9 /* AFXMLRequestOperation.m */; settings = {ASSET_TAGS = (); }; };
 		CF6CB14F1BE7F3C500D7F4E9 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CB1461BE7F3C500D7F4E9 /* UIImageView+AFNetworking.m */; settings = {ASSET_TAGS = (); }; };
-		CF6CB1521BE7F55C00D7F4E9 /* FlingObject.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CB1511BE7F55C00D7F4E9 /* FlingObject.m */; settings = {ASSET_TAGS = (); }; };
+		CF6CB1521BE7F55C00D7F4E9 /* Fling.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CB1511BE7F55C00D7F4E9 /* Fling.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,8 +90,8 @@
 		CF6CB1441BE7F3C500D7F4E9 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		CF6CB1451BE7F3C500D7F4E9 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		CF6CB1461BE7F3C500D7F4E9 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
-		CF6CB1501BE7F55C00D7F4E9 /* FlingObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlingObject.h; sourceTree = "<group>"; };
-		CF6CB1511BE7F55C00D7F4E9 /* FlingObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlingObject.m; sourceTree = "<group>"; };
+		CF6CB1501BE7F55C00D7F4E9 /* Fling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fling.h; sourceTree = "<group>"; };
+		CF6CB1511BE7F55C00D7F4E9 /* Fling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fling.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,8 +224,8 @@
 		CF6CB11D1BE7EDE000D7F4E9 /* objects */ = {
 			isa = PBXGroup;
 			children = (
-				CF6CB1501BE7F55C00D7F4E9 /* FlingObject.h */,
-				CF6CB1511BE7F55C00D7F4E9 /* FlingObject.m */,
+				CF6CB1501BE7F55C00D7F4E9 /* Fling.h */,
+				CF6CB1511BE7F55C00D7F4E9 /* Fling.m */,
 			);
 			name = objects;
 			sourceTree = "<group>";
@@ -402,7 +402,7 @@
 				CF6CB1471BE7F3C500D7F4E9 /* AFHTTPClient.m in Sources */,
 				CF6CB14A1BE7F3C500D7F4E9 /* AFJSONRequestOperation.m in Sources */,
 				CF6CB0C01BE7E09800D7F4E9 /* main.m in Sources */,
-				CF6CB1521BE7F55C00D7F4E9 /* FlingObject.m in Sources */,
+				CF6CB1521BE7F55C00D7F4E9 /* Fling.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,6 +626,7 @@
 				CF6CB0ED1BE7E09900D7F4E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CF6CB0EE1BE7E09900D7F4E9 /* Build configuration list for PBXNativeTarget "SuperFlingAppTests" */ = {
 			isa = XCConfigurationList;
@@ -634,6 +635,7 @@
 				CF6CB0F01BE7E09900D7F4E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CF6CB0F11BE7E09900D7F4E9 /* Build configuration list for PBXNativeTarget "SuperFlingAppUITests" */ = {
 			isa = XCConfigurationList;
@@ -642,6 +644,7 @@
 				CF6CB0F31BE7E09900D7F4E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

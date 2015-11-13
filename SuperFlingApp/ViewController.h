@@ -10,7 +10,7 @@
 
 @interface ViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
-    
+    NSMutableArray *superFlings;
 }
 
 @property(nonatomic, retain)IBOutlet UITableView *tableView;

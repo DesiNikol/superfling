@@ -9,8 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface DataManager : NSObject
+{
+    BOOL __block queueIsEmpty;
+}
 
-@property(nonatomic, retain) NSMutableArray *superFlings;
+@property(nonatomic, retain) NSOperationQueue *queue;
 
 +(DataManager *)sharedObject;
 -(void)loadContent;
